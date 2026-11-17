@@ -1,0 +1,24 @@
+# Dependencies and generated files
+node_modules/
+package-lock.json
+
+# Build artifacts
+dist/
+build/
+
+# Editor and OS files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Ignore the local copy of the data — it lives in Drought_Ghana_Thesis/data
+data/processed/*.nc
+data/processed/*.csv
+data/shapefiles/*.geojson
+data/shapefiles/*.shp
+data/shapefiles/*.dbf
+data/shapefiles/*.shx
+data/shapefiles/*.prj
