@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghana Drought Monitoring &amp; Prediction System</title>
+
+    <!-- MapLibre GL stylesheet. Required for the maps to display correctly. -->
+    <link href="https://unpkg.com/maplibre-gl@^5.0.0/dist/maplibre-gl.css" rel="stylesheet" />
+
+    <!-- Our own stylesheet. This file will be created in Step 3. -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- ============================================================
+         HEADER
+         ============================================================ -->
+    <header class="app-header">
+        <h1>Ghana Drought Monitoring &amp; Prediction System</h1>
+        <p class="subtitle">SPI-based drought monitoring and machine learning forecasts</p>
+    </header>
+
+    <!-- ============================================================
+         BODY: sidebar on the left, main content on the right
+         ============================================================ -->
+    <div class="app-body">
+
+        <!-- ========================================================
+             SIDEBAR — user controls and warning status
+             ======================================================== -->
+        <aside class="sidebar">
+
+            <!-- Control 1: District selection -->
+            <div class="control-group">
+                <label for="district-select">1. Select District</label>
+                <select id="district-select">
+                    <option value="">Loading districts...</option>
+                </select>
+            </div>
+
+            <!-- Control 2: SPI timescale selection -->
+            <div class="control-group">
+                <label>2. SPI Timescale</label>
+                <div class="btn-group" id="timescale-group">
+                    <button type="button" data-ts="1">SPI-1</button>
+                    <button type="button" data-ts="3" class="active">SPI-3</button>
+                    <button type="button" data-ts="6">SPI-6</button>
+                    <button type="button" data-ts="12">SPI-12</button>
+                </div>
+            </div>
+
+            <!-- Control 3: Forecast lead time selection -->
+            <div class="control-group">
+                <label>3. Forecast Lead Time</label>
+                <div class="btn-group" id="lead-group">
+                    <button type="button" data-lead="1" class="active">1 Month</button>
+                    <button type="button" data-lead="3">3 Months</button>
+                </div>
+            </div>
+
+            <hr />
+
+            <!-- Warning status panel -->
+            <div id="warning-panel">
+                <div id="current-warning" class="warning-box">
+                    Current: Loading...
+                </div>
+                <div id="forecast-warning" class="warning-box">
+                    Forecast: Loading...
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- ========================================================
+             MAIN CONTENT — three tabs
+             ======================================================== -->
+        <main class="main-content">
+
+            <!-- Tab buttons -->
+            <nav class="tabs">
+                <button type="button" class="tab-btn active" data-tab="monitoring">Monitoring</button>
+                <button type="button" class="tab-btn" data-tab="prediction">Prediction</button>
+                <button type="button" class="tab-btn" data-tab="downloads">Downloads</button>
+            </nav>
+
+            <!-- ====================================================
+                 TAB 1 — MONITORING
+                 ==================================================== -->
+            <section id="tab-monitoring" class="tab-content active">
+
+                <!-- Date picker row -->
+                <div class="map-toolbar">
+                    <label for="month-select">Month:</label>
+                    <select id="month-select"></select>
+
+                    <label for="year-select">Year:</label>
+                    <select id="year-select"></select>
+
+                    <span id="slider-date-label" class="date-label"></span>
+                </div>
+
+                <!-- Spatial map of observed SPI -->
+                <div id="observed-map" class="map-container"></div>
+
+                <!-- SPI history line chart -->
+                <div class="chart-container">
+                    <canvas id="spi-history-chart"></canvas>
+                </div>
+
+            </section>
+
+            <!-- ====================================================
+                 TAB 2 — PREDICTION
+                 ==================================================== -->
+            <section id="tab-prediction" class="tab-content">
+
+                <!-- Note describing which target month the forecast is for -->
+                <div id="prediction-note" class="info-note">
+                    Loading prediction details...
+                </div>
+
+                <!-- Choropleth map of predicted SPI by district -->
+                <div id="predicted-map" class="map-container"></div>
+
+            </section>
+
+            <!-- ====================================================
+                 TAB 3 — DOWNLOADS
+                 ==================================================== -->
+            <section id="tab-downloads" class="tab-content">
+                <h3>Download Data</h3>
+                <p>
+                    Download a formatted report for the selected district, or the raw prediction
+                    data for the selected SPI timescale and forecast lead time.
+                </p>
+
+                <div class="download-buttons">
+                    <button type="button" id="btn-download-report" class="btn-primary">
+                        Download Drought Report (TXT)
+                    </button>
+                    <button type="button" id="btn-download-preds" class="btn-secondary">
+                        Download Predictions (CSV)
+                    </button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============================================================
+         LIBRARIES
+         Loaded as plain scripts, not ES modules, because they
+         register globals (maplibregl, Chart, Papa, netcdf4).
+         ============================================================ -->
+    <script src="https://unpkg.com/maplibre-gl@^5.0.0/dist/maplibre-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <!-- Chart.js annotation plugin for the drought threshold lines.
+         Loaded after Chart.js, before our own scripts. -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+
+    <!-- Our application entry point. ES module so we can use import/export. -->
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
