@@ -506,3 +506,27 @@ body {
         font-size: 18px;
     }
 }
+
+/* ------------------------------------------------------------
+   SPI colour legend in the sidebar
+   ------------------------------------------------------------ */
+.spi-legend {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--gh-muted);
+}
+
+.spi-legend .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+}
+
+.spi-legend .swatch {
+    display: inline-block;
+    width: 14px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
