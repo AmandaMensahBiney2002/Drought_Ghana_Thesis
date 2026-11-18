@@ -1,0 +1,508 @@
+/* ============================================================
+   Ghana Drought Monitoring & Prediction System
+   Global stylesheet — Ghanaian visual identity
+   ============================================================ */
+
+/* Ghana national colours, defined once for reuse */
+:root {
+    --gh-red:   #ce1126;
+    --gh-gold:  #fcd116;
+    --gh-green: #006b3f;
+    --gh-black: #000000;
+    --gh-dark:  #1a1a1a;
+    --gh-light: #fafaf7;
+    --gh-line:  #e5e5e0;
+    --gh-muted: #6b7280;
+}
+
+/* ------------------------------------------------------------
+   Reset and base typography
+   ------------------------------------------------------------ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: var(--gh-light);
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ------------------------------------------------------------
+   Header
+   A thin Ghanaian stripe along the very top, a dark band below,
+   and the black star icon beside the title.
+   ------------------------------------------------------------ */
+.app-header {
+    position: relative;
+    background: var(--gh-dark);
+    color: #ffffff;
+    padding: 22px 32px 18px 32px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+/* The Ghanaian colour stripe above the header content */
+.app-header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(
+        to right,
+        var(--gh-red)   0%   33.33%,
+        var(--gh-gold)  33.33% 66.66%,
+        var(--gh-green) 66.66% 100%
+    );
+}
+
+/* Header content layout — star, then title and subtitle */
+.app-header .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* The black star icon. We draw it as an inline SVG via a
+   background image so no external file is needed. */
+.app-header .gh-star {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: var(--gh-black);
+    mask-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
+<path d='M12 1.5l2.6 7.2h7.6l-6.1 4.5 2.3 7.3L12 16.1l-6.4 4.4 2.3-7.3L1.8 8.7h7.6z'/>\
+</svg>");
+    -webkit-mask-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
+<path d='M12 1.5l2.6 7.2h7.6l-6.1 4.5 2.3 7.3L12 16.1l-6.4 4.4 2.3-7.3L1.8 8.7h7.6z'/>\
+</svg>");
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-position: center;
+}
+
+.app-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 3px;
+}
+
+.app-header .subtitle {
+    font-size: 13px;
+    color: var(--gh-gold);
+    opacity: 0.9;
+}
+
+/* ------------------------------------------------------------
+   Layout
+   ------------------------------------------------------------ */
+.app-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ------------------------------------------------------------
+   Sidebar
+   ------------------------------------------------------------ */
+.sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    background: #ffffff;
+    border-right: 1px solid var(--gh-line);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+.control-group > label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.sidebar select {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #1f2937;
+    cursor: pointer;
+    transition: border-color 0.15s;
+}
+
+.sidebar select:hover {
+    border-color: var(--gh-green);
+}
+
+.sidebar select:focus {
+    outline: none;
+    border-color: var(--gh-green);
+    box-shadow: 0 0 0 3px rgba(0, 107, 63, 0.12);
+}
+
+/* ------------------------------------------------------------
+   Segmented button groups
+   The active state uses Ghanaian gold with black text, echoing
+   the flag's middle band.
+   ------------------------------------------------------------ */
+.btn-group {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #d1d5db;
+}
+
+.btn-group button {
+    flex: 1;
+    padding: 8px 4px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #ffffff;
+    color: #374151;
+    border: none;
+    border-right: 1px solid #d1d5db;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn-group button:last-child {
+    border-right: none;
+}
+
+.btn-group button:hover {
+    background: #f9fafb;
+    color: var(--gh-green);
+}
+
+.btn-group button.active {
+    background: var(--gh-gold);
+    color: var(--gh-black);
+}
+
+/* ------------------------------------------------------------
+   Warning panel
+   These boxes display SPI drought categories and must remain
+   in the SCIENTIFIC colour scale. The JavaScript sets their
+   background colour based on the SPI value.
+   ------------------------------------------------------------ */
+#warning-panel {
+    margin-top: 16px;
+}
+
+.warning-box {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #ffffff;
+    background: #bdbdbd;
+    text-align: center;
+    line-height: 1.4;
+    transition: background-color 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.sidebar hr {
+    border: none;
+    border-top: 1px solid var(--gh-line);
+    margin: 20px 0 16px 0;
+}
+
+/* ------------------------------------------------------------
+   Main content
+   ------------------------------------------------------------ */
+.main-content {
+    flex: 1;
+    padding: 20px 24px;
+    overflow-y: auto;
+    min-width: 0;
+}
+
+/* ------------------------------------------------------------
+   Tabs
+   Active underline in Ghanaian green with a small gold
+   pre-underline accent, so both colours appear.
+   ------------------------------------------------------------ */
+.tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--gh-line);
+    margin-bottom: 16px;
+}
+
+.tab-btn {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gh-muted);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.tab-btn:hover {
+    color: var(--gh-green);
+}
+
+.tab-btn.active {
+    color: var(--gh-green);
+    border-bottom-color: var(--gh-green);
+}
+
+/* Small gold segment on the active tab, sitting on top of the
+   green underline. Looks subtle and unmistakably Ghanaian. */
+.tab-btn.active::after {
+    content: "";
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    bottom: -2px;
+    height: 2px;
+    background: var(--gh-gold);
+}
+
+/* ------------------------------------------------------------
+   Tab content
+   ------------------------------------------------------------ */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ------------------------------------------------------------
+   Map toolbar (month and year pickers)
+   ------------------------------------------------------------ */
+.map-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #ffffff;
+    border: 1px solid var(--gh-line);
+    border-radius: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.map-toolbar label {
+    font-weight: 600;
+    font-size: 13px;
+    color: #374151;
+}
+
+.map-toolbar select {
+    padding: 6px 10px;
+    font-size: 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.map-toolbar select:focus {
+    outline: none;
+    border-color: var(--gh-green);
+    box-shadow: 0 0 0 3px rgba(0, 107, 63, 0.12);
+}
+
+.date-label {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--gh-green);
+    font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   Map containers
+   ------------------------------------------------------------ */
+.map-container {
+    width: 100%;
+    height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--gh-line);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 16px;
+    background: #ffffff;
+    position: relative;
+}
+
+/* ------------------------------------------------------------
+   Chart container
+   ------------------------------------------------------------ */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid var(--gh-line);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ------------------------------------------------------------
+   Info note (Prediction tab)
+   Keeps the scientific blue tone but adds a Ghanaian green
+   left border for identity.
+   ------------------------------------------------------------ */
+.info-note {
+    padding: 12px 16px;
+    background: #eff6ff;
+    border-left: 4px solid var(--gh-green);
+    border-radius: 4px;
+    color: #1e3a5f;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+/* ------------------------------------------------------------
+   Downloads tab
+   ------------------------------------------------------------ */
+#tab-downloads h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+#tab-downloads p {
+    color: #4b5563;
+    margin-bottom: 20px;
+    max-width: 640px;
+}
+
+.download-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------------
+   Buttons
+   Primary action uses Ghanaian green; secondary uses a
+   neutral slate. Neither uses red, because red is a scientific
+   drought colour and mixing the two would be confusing.
+   ------------------------------------------------------------ */
+.btn-primary,
+.btn-secondary {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.05s;
+}
+
+.btn-primary {
+    background: var(--gh-green);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: #00532f;
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+}
+
+.btn-secondary {
+    background: #4b5563;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background: #374151;
+}
+
+.btn-secondary:active {
+    transform: translateY(1px);
+}
+
+/* ------------------------------------------------------------
+   MapLibre popup typography
+   ------------------------------------------------------------ */
+.maplibregl-popup-content {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.maplibregl-popup-content b {
+    color: var(--gh-green);
+}
+
+/* ------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------ */
+@media (max-width: 900px) {
+    .app-body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--gh-line);
+    }
+
+    .map-container {
+        height: 400px;
+    }
+
+    .chart-container {
+        height: 280px;
+    }
+
+    .app-header .gh-star {
+        width: 32px;
+        height: 32px;
+    }
+
+    .app-header h1 {
+        font-size: 18px;
+    }
+}
