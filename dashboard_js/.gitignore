@@ -22,3 +22,8 @@ data/shapefiles/*.shp
 data/shapefiles/*.dbf
 data/shapefiles/*.shx
 data/shapefiles/*.prj
+
+
+# Generated SPI grid JSON (recreate with extract_spi_grid.py)
+data/processed/spi/
+data/processed/spi_index.json
