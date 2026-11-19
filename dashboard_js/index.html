@@ -8,15 +8,15 @@
     <!-- MapLibre GL stylesheet. Required for the maps to display correctly. -->
     <link href="https://unpkg.com/maplibre-gl@^5.0.0/dist/maplibre-gl.css" rel="stylesheet" />
 
-    <!-- Our own stylesheet. This file will be created in Step 3. -->
-    <link rel="stylesheet" href="css/style.css" />
+    <!-- Our own stylesheet. -->
+    <link rel="stylesheet" href="css/style.css?v=2" />
 </head>
 <body>
 
     <!-- ============================================================
          HEADER
          ============================================================ -->
-       <header class="app-header">
+    <header class="app-header">
         <div class="header-inner">
             <div class="gh-star" aria-hidden="true"></div>
             <div>
@@ -76,11 +76,22 @@
                 </div>
             </div>
 
-            <!-- Small legend showing the SPI colour scale.
-                 Populated by JavaScript in a later step. -->
-            <div id="spi-legend" class="spi-legend"></div>
+            <hr />
 
-
+            <!-- SPI colour legend — matches the classification in utils.js -->
+            <div class="control-group">
+                <label>SPI Classification</label>
+                <div id="spi-legend" class="spi-legend">
+                    <div class="legend-row"><span class="swatch" style="background:#7f0000"></span> Extreme drought (&lt; −2.00)</div>
+                    <div class="legend-row"><span class="swatch" style="background:#d7301f"></span> Severe drought (−2.00 to −1.50)</div>
+                    <div class="legend-row"><span class="swatch" style="background:#fc8d59"></span> Moderate drought (−1.50 to −1.00)</div>
+                    <div class="legend-row"><span class="swatch" style="background:#b8bfc7"></span> Near normal (−1.00 to 1.00)</div>
+                    <div class="legend-row"><span class="swatch" style="background:#91bfdb"></span> Moderately wet (1.00 to 1.50)</div>
+                    <div class="legend-row"><span class="swatch" style="background:#4575b4"></span> Very wet (1.50 to 2.00)</div>
+                    <div class="legend-row"><span class="swatch" style="background:#313695"></span> Extremely wet (&gt; 2.00)</div>
+                    <div class="legend-row"><span class="swatch" style="background:#bdbdbd"></span> No data</div>
+                </div>
+            </div>
 
         </aside>
 
@@ -163,18 +174,17 @@
     <!-- ============================================================
          LIBRARIES
          Loaded as plain scripts, not ES modules, because they
-         register globals (maplibregl, Chart, Papa, netcdf4).
+         register globals (maplibregl, Chart, Papa).
          ============================================================ -->
     <script src="https://unpkg.com/maplibre-gl@^5.0.0/dist/maplibre-gl.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-    <!-- Chart.js annotation plugin for the drought threshold lines.
-         Loaded after Chart.js, before our own scripts. -->
+    <!-- Chart.js annotation plugin for the drought threshold lines. -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 
     <!-- Our application entry point. ES module so we can use import/export. -->
-    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/app.js?v=2"></script>
 
 </body>
 </html>
